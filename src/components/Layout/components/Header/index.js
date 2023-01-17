@@ -23,7 +23,22 @@ const cx = classNames.bind(styles);
 const MENU_ITEMS = [
     {   
         icon: <FontAwesomeIcon icon={faEarthAsia} />, 
-        title: 'English' 
+        title: 'English' ,
+        children :{
+            title:'Language',
+            data:[
+                {
+                    type:"language",
+                    code:'en',
+                    title:'English',
+                },
+                {
+                    type:"language",
+                    code:'vi',
+                    title:'Tiếng việt',
+                }
+            ]
+        }
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -35,19 +50,28 @@ const MENU_ITEMS = [
         title: 'Keyboard shortcuts',
     }
 ];
+
+
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
-
     useEffect(() => {
         setTimeout(() => {
             setSearchResult([]);
         }, 0);
     }, []);
-
+    // xử lí
+    const handleMenuChange=(menuItem)=>{
+            switch (menuItem.type) {
+                case "language":
+                    // Handle change language
+                    break;
+                default:
+            }
+    }
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="Tiktok" />
+                <img src={images.logo} className={cx('images-style')} alt="Tiktok" />
                 <Tippy
                     interactive
                     visible={searchResult.length > 0}
@@ -88,7 +112,7 @@ function Header() {
                 <div className={cx('actions')}>
                     <Button text>Upload</Button>
                     <Button primary>Log in</Button>
-                    <Menu items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
