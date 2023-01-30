@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Image from "~/components/Image";
+import Image from '~/components/Image';
+import routesConfig from "~/config/routes"
 import {
     faEllipsisVertical,
     faSignOut,
@@ -11,13 +13,25 @@ import Button from '~/components/Button';
 import images from '~/assets/images/';
 import styles from './Header.module.scss';
 import Menu from '~/components/Popper/Menu';
-import { BusinessSuiteIcon, CoinIcon, FeedbackIcon, InboxIcon, KeyboardIcon, LiveStudioIcon, MessageIcon, UserIcon ,LanguageIcon, SettingIcon, PlusIcon} from '~/components/Icons';
+import {
+    BusinessSuiteIcon,
+    CoinIcon,
+    FeedbackIcon,
+    InboxIcon,
+    KeyboardIcon,
+    LiveStudioIcon,
+    MessageIcon,
+    UserIcon,
+    LanguageIcon,
+    SettingIcon,
+    PlusIcon,
+} from '~/components/Icons';
 import Search from '../Search';
 const cx = classNames.bind(styles);
 
 const MENU_ITEMS = [
     {
-        icon: <LanguageIcon/>,
+        icon: <LanguageIcon />,
         title: 'English',
         children: {
             title: 'Language',
@@ -58,29 +72,29 @@ function Header() {
         }
     };
 
-    const userMenu=[
+    const userMenu = [
         {
-            icon: <UserIcon/>,
+            icon: <UserIcon />,
             title: 'View profile',
             to: '/@Trangg',
         },
         {
-            icon: <CoinIcon/>,
+            icon: <CoinIcon />,
             title: 'Get coins',
             to: '/coin',
         },
         {
-            icon: <LiveStudioIcon/>,
+            icon: <LiveStudioIcon />,
             title: 'LIVE Studio',
             to: '/live',
         },
         {
-            icon: <BusinessSuiteIcon/>,
+            icon: <BusinessSuiteIcon />,
             title: 'Business Suite',
             to: '/business Suite',
         },
         {
-            icon: <SettingIcon/>,
+            icon: <SettingIcon />,
             title: 'Setting',
             to: '/settings',
         },
@@ -89,17 +103,18 @@ function Header() {
             icon: <FontAwesomeIcon icon={faSignOut} />,
             title: 'Log Out',
             to: '/logout',
-            separate:true
+            separate: true,
         },
-    ]
+    ];
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img
-                    src={images.logo}
-                    className={cx('images-style')}
-                    alt="Tiktok"
-                />
+                <Link to={routesConfig.home} className={cx('images-style')}>
+                    <img
+                        src={images.logo}
+                        alt="Tiktok"
+                    />
+                </Link>
 
                 <Search />
 
@@ -109,29 +124,43 @@ function Header() {
                             {/* <button className={cx('upload-btn')}>
                                 + Tải Lên
                             </button> */}
-                            <Tippy content="Upload Video" placement='bottom' delay={[0,200]}>
-                            <button className={cx('action-btn')}>
-                                {/* <UploadIcon/> */}
-                                <PlusIcon className={cx('Plus-Icon')}/>
-                                <span className={cx('upload-text')}>Upload </span>
-                            </button>
+                            <Tippy
+                                content="Upload Video"
+                                placement="bottom"
+                                delay={[0, 200]}
+                            >
+                                <button className={cx('action-btn')}>
+                                    {/* <UploadIcon/> */}
+                                    <PlusIcon className={cx('Plus-Icon')} />
+                                    <span className={cx('upload-text')}>
+                                        Upload{' '}
+                                    </span>
+                                </button>
                             </Tippy>
 
-                            <Tippy content="Message" placement='bottom' delay={[0,200]}>
-                            <button className={cx('actions-btn')}>
-                                <MessageIcon/>
-                            <span className={cx('sub-message')}>1</span>
-                            </button>
-                            </Tippy>
-                            
-                            <Tippy content="Inbox" placement='bottom' delay={[0,200]}>
-                            <button className={cx('actions-btn')}>
-                                <InboxIcon/>
-                                <span className={cx('sub-message')}>16</span>
-                            </button>
+                            <Tippy
+                                content="Message"
+                                placement="bottom"
+                                delay={[0, 200]}
+                            >
+                                <button className={cx('actions-btn')}>
+                                    <MessageIcon />
+                                    <span className={cx('sub-message')}>1</span>
+                                </button>
                             </Tippy>
 
-
+                            <Tippy
+                                content="Inbox"
+                                placement="bottom"
+                                delay={[0, 200]}
+                            >
+                                <button className={cx('actions-btn')}>
+                                    <InboxIcon />
+                                    <span className={cx('sub-message')}>
+                                        16
+                                    </span>
+                                </button>
+                            </Tippy>
                         </>
                     ) : (
                         <>
@@ -139,14 +168,17 @@ function Header() {
                             <Button primary>Log in</Button>
                         </>
                     )}
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                    <Menu
+                        items={currentUser ? userMenu : MENU_ITEMS}
+                        onChange={handleMenuChange}
+                    >
                         {currentUser ? (
-                                <Image
-                                    className={cx('user-avatar')}
-                                    src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/4758319940cdf9b354a4a6ade0be0886~c5_300x300.webp?x-expires=1674025200&x-signature=%2FHsP51JwR0Zigrsc6qeXbxW8Hsw%3D"
-                                    alt="Trang"
-                                    fallback="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
-                                />
+                            <Image
+                                className={cx('user-avatar')}
+                                src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/4758319940cdf9b354a4a6ade0be0886~c5_300x300.webp?x-expires=1674025200&x-signature=%2FHsP51JwR0Zigrsc6qeXbxW8Hsw%3D"
+                                alt="Trang"
+                                fallback="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
+                            />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />

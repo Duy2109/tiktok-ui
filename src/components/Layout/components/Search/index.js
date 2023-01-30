@@ -8,7 +8,7 @@ import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { useDebounce } from '~/hooks';
-import * as searchServices from "~/apiServices/searchServices"
+import * as searchServices from '~/apiServices/searchServices';
 const cx = classNames.bind(styles);
 
 function Search() {
@@ -48,17 +48,26 @@ function Search() {
             return;
         }
         //fetch dữ liệu của back end từ api về rồi show ra view UI
-        const fetchApi= async ()=>{
+        const fetchApi = async () => {
             // trước khi gọi API thì set nó bằng true
             setLoading(true);
-            const result = await searchServices.search(debounced)
+            const result = await searchServices.search(debounced);
             setSearchResult(result);
             setLoading(false);
-            
-        }
+        };
         fetchApi();
-        
     }, [debounced]);
+
+    //xử lí không cho người dùng nhập dấu khoảng cách đầu tiên vào ô tìm tiếm
+
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        // nếu dữ liệu nhập vào input bắt đầu không phải là khoảng trắng
+        // thì cho phép người dùng nhập chữ số bình thường
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
     return (
         <HeadlessTippy
             interactive
@@ -83,7 +92,7 @@ function Search() {
                     placeholder="Search account and videos"
                     spellCheck={false}
                     //ràng buộc hai chiều khi nhập dữ liệu vào ô input , sẽ lưu dữ liệu nhập vào setSearchValue
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChange}
                     onFocus={() => setShowResult(true)}
                 />
                 {/* khi có searchvalue thì nó mới hiển thị lên clear icon  */}
@@ -100,7 +109,10 @@ function Search() {
                         icon={faSpinner}
                     />
                 )}
-                <button className={cx('search-btn')}>
+                <button
+                    className={cx('search-btn')}
+                    onMouseDown={(e) => e.preventDefault()}
+                >
                     <SearchIcon />
                 </button>
             </div>
