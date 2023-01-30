@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from '~/components/Image';
-import routesConfig from "~/config/routes"
+import routesConfig from '~/config/routes';
 import {
     faEllipsisVertical,
     faSignOut,
@@ -110,10 +110,7 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <Link to={routesConfig.home} className={cx('images-style')}>
-                    <img
-                        src={images.logo}
-                        alt="Tiktok"
-                    />
+                    <img src={images.logo} alt="Tiktok" />
                 </Link>
 
                 <Search />

@@ -69,54 +69,65 @@ function Search() {
         }
     };
     return (
-        <HeadlessTippy
-            interactive
-            //xét điều kiện khi tồn tại showResult và searchResult sẽ hide result
-            visible={showResult && searchResult.length > 0}
-            render={(attrs) => (
-                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper>
-                        <h4 className={cx('search-title')}>Accounts</h4>
-                        {searchResult.map((result) => (
-                            <AccountItem key={result.id} data={result} />
-                        ))}
-                    </PopperWrapper>
-                </div>
-            )}
-            onClickOutside={handleHideResult}
-        >
-            <div className={cx('search')}>
-                <input
-                    ref={searchValueRef}
-                    value={searchValue}
-                    placeholder="Search account and videos"
-                    spellCheck={false}
-                    //ràng buộc hai chiều khi nhập dữ liệu vào ô input , sẽ lưu dữ liệu nhập vào setSearchValue
-                    onChange={handleChange}
-                    onFocus={() => setShowResult(true)}
-                />
-                {/* khi có searchvalue thì nó mới hiển thị lên clear icon  */}
-                {/* !! chuyển hóa kiểu dữ liệu thành boolean */}
-                {/* nếu search value tồn tại thì hiển thị icon Clear và loading không hiển thị  */}
-                {!!searchValue && !loading && (
-                    <button className={cx('clear')} onClick={handleClearResult}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
+        // sử dụng thẻ div hoặc thẻ span để bao bọc bên ngoài trách làm ảnh hưởng 
+        // hoặc xung đột các element bên trong dẫn đến cảnh báo 
+        <div>
+            <HeadlessTippy
+                interactive
+                //xét điều kiện khi tồn tại showResult và searchResult sẽ hide result
+                visible={showResult && searchResult.length > 0}
+                render={(attrs) => (
+                    <div
+                        className={cx('search-result')}
+                        tabIndex="-1"
+                        {...attrs}
+                    >
+                        <PopperWrapper>
+                            <h4 className={cx('search-title')}>Accounts</h4>
+                            {searchResult.map((result) => (
+                                <AccountItem key={result.id} data={result} />
+                            ))}
+                        </PopperWrapper>
+                    </div>
                 )}
-                {loading && (
-                    <FontAwesomeIcon
-                        className={cx('loading')}
-                        icon={faSpinner}
+                onClickOutside={handleHideResult}
+            >
+                <div className={cx('search')}>
+                    <input
+                        ref={searchValueRef}
+                        value={searchValue}
+                        placeholder="Search account and videos"
+                        spellCheck={false}
+                        //ràng buộc hai chiều khi nhập dữ liệu vào ô input , sẽ lưu dữ liệu nhập vào setSearchValue
+                        onChange={handleChange}
+                        onFocus={() => setShowResult(true)}
                     />
-                )}
-                <button
-                    className={cx('search-btn')}
-                    onMouseDown={(e) => e.preventDefault()}
-                >
-                    <SearchIcon />
-                </button>
-            </div>
-        </HeadlessTippy>
+                    {/* khi có searchvalue thì nó mới hiển thị lên clear icon  */}
+                    {/* !! chuyển hóa kiểu dữ liệu thành boolean */}
+                    {/* nếu search value tồn tại thì hiển thị icon Clear và loading không hiển thị  */}
+                    {!!searchValue && !loading && (
+                        <button
+                            className={cx('clear')}
+                            onClick={handleClearResult}
+                        >
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </button>
+                    )}
+                    {loading && (
+                        <FontAwesomeIcon
+                            className={cx('loading')}
+                            icon={faSpinner}
+                        />
+                    )}
+                    <button
+                        className={cx('search-btn')}
+                        onMouseDown={(e) => e.preventDefault()}
+                    >
+                        <SearchIcon />
+                    </button>
+                </div>
+            </HeadlessTippy>
+        </div>
     );
 }
 
