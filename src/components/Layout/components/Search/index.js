@@ -8,7 +8,7 @@ import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { useState, useEffect, useRef } from 'react';
 import { useDebounce } from '~/hooks';
-
+import * as searchServices from "~/apiServices/searchServices"
 const cx = classNames.bind(styles);
 
 function Search() {
@@ -21,11 +21,11 @@ function Search() {
     //hiển thị kết quả tìm kiếm
     const [showResult, setShowResult] = useState(true);
 
-    //loadding khi tìm kiếm 
+    //loadding khi tìm kiếm
     const [loading, setLoading] = useState(false);
 
     // lần đầu tiên nó sẽ là chuỗi rỗng
-    const debounced= useDebounce(searchValue, 600)
+    const debounced = useDebounce(searchValue, 600);
 
     // sau khi nhấn nút xóa đồng thời focus vào ô input , ta sử dụng useRef()
     const searchValueRef = useRef();
@@ -47,22 +47,17 @@ function Search() {
             setSearchResult([]);
             return;
         }
-        // trước khi gọi API thì set nó bằng true 
-        setLoading(true);
         //fetch dữ liệu của back end từ api về rồi show ra view UI
-        fetch(
-            `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`,
-        )
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                // sau khi gọi API xong thì loading là false 
-                setLoading(false)
-            })
-            .catch(()=>{
-                // khi error thì sẽ cho loading là false 
-                setLoading(false)
-            })
+        const fetchApi= async ()=>{
+            // trước khi gọi API thì set nó bằng true
+            setLoading(true);
+            const result = await searchServices.search(debounced)
+            setSearchResult(result);
+            setLoading(false);
+            
+        }
+        fetchApi();
+        
     }, [debounced]);
     return (
         <HeadlessTippy
@@ -99,7 +94,12 @@ function Search() {
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
-                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+                {loading && (
+                    <FontAwesomeIcon
+                        className={cx('loading')}
+                        icon={faSpinner}
+                    />
+                )}
                 <button className={cx('search-btn')}>
                     <SearchIcon />
                 </button>
