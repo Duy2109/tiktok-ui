@@ -80,3 +80,36 @@
     font-family: var(--font-family);
     background-color: var(--primary);
 }
+
+
+
+.action-btn{
+    min-width: 110px;
+    padding: 0 16px;
+    height: 36px;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 1);
+    &:hover{
+        background-color: rgba(22, 24, 35, .03);
+    }
+    cursor: pointer;
+}
+//upload-text
+.upload-text{
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+}
+
+//plus-icon
+
+.Plus-Icon{
+    margin-right: 8px;
+}
+

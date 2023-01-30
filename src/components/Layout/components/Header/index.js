@@ -11,7 +11,7 @@ import Button from '~/components/Button';
 import images from '~/assets/images/';
 import styles from './Header.module.scss';
 import Menu from '~/components/Popper/Menu';
-import { BusinessSuiteIcon, CoinIcon, FeedbackIcon, InboxIcon, KeyboardIcon, LiveStudioIcon, MessageIcon, UploadIcon, UserIcon ,LanguageIcon, SettingIcon, SearchIcon} from '~/components/Icons';
+import { BusinessSuiteIcon, CoinIcon, FeedbackIcon, InboxIcon, KeyboardIcon, LiveStudioIcon, MessageIcon, UserIcon ,LanguageIcon, SettingIcon, PlusIcon} from '~/components/Icons';
 import Search from '../Search';
 const cx = classNames.bind(styles);
 
@@ -110,8 +110,10 @@ function Header() {
                                 + Tải Lên
                             </button> */}
                             <Tippy content="Upload Video" placement='bottom' delay={[0,200]}>
-                            <button className={cx('actions-btn')}>
-                                <UploadIcon/>
+                            <button className={cx('action-btn')}>
+                                {/* <UploadIcon/> */}
+                                <PlusIcon className={cx('Plus-Icon')}/>
+                                <span className={cx('upload-text')}>Upload </span>
                             </button>
                             </Tippy>
 
