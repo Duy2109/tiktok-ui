@@ -75,10 +75,27 @@
 
 .sub-message{
     position: absolute;
-    top: -3px;
-    right: 0px;
-    padding: 0px 6px;
+    top: -6px;
+    right: 3px;
+    padding: 0px;
+    min-width: 2rem;
     height: 2rem;
+    line-height: 2rem;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--white);
+    font-family: var(--font-family);
+    background-color: var(--primary);
+}
+
+.sub-inbox{
+    position: absolute;
+    top: -2px;
+    right: 7px;
+    padding: 0px;
+    height: 2rem;
+    min-width: 2rem;
     line-height: 2rem;
     border-radius: 10px;
     font-size: 1.4rem;

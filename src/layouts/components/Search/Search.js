@@ -26,7 +26,7 @@ function Search() {
     const [loading, setLoading] = useState(false);
 
     // lần đầu tiên nó sẽ là chuỗi rỗng
-    const debounced = useDebounce(searchValue, 600);
+    const debouncedValue = useDebounce(searchValue, 600);
 
     // sau khi nhấn nút xóa đồng thời focus vào ô input , ta sử dụng useRef()
     const searchValueRef = useRef();
@@ -44,7 +44,7 @@ function Search() {
 
     useEffect(() => {
         //nếu không có search value thì nó sẽ return
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([]);
             return;
         }
@@ -52,12 +52,12 @@ function Search() {
         const fetchApi = async () => {
             // trước khi gọi API thì set nó bằng true
             setLoading(true);
-            const result = await searchServices.search(debounced);
+            const result = await searchServices.search(debouncedValue);
             setSearchResult(result);
             setLoading(false);
         };
         fetchApi();
-    }, [debounced]);
+    }, [debouncedValue]);
 
     //xử lí không cho người dùng nhập dấu khoảng cách đầu tiên vào ô tìm tiếm
 

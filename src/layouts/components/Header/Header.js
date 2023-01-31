@@ -148,8 +148,8 @@ function Header() {
                             >
                                 <button className={cx('actions-btn')}>
                                     <InboxIcon />
-                                    <span className={cx('sub-message')}>
-                                        16
+                                    <span className={cx('sub-inbox')}>
+                                        7
                                     </span>
                                 </button>
                             </Tippy>
