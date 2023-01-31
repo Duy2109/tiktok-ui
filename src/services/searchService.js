@@ -1,4 +1,4 @@
-import * as request from '~/utils/request';
+import * as httpRequest from '~/utils/httpRequest';
 
 // ta tạo biến search bằng async và truyền vào nó 2 tham số 
 // q là nội dung tìm kiếm , và type mặc định ta để là "less" 
@@ -8,7 +8,7 @@ import * as request from '~/utils/request';
 
 export const search = async (q, type = 'less') => {
     try {
-        const res = await request.get('users/search', {
+        const res = await httpRequest.get('users/search', {
             params: {
                 q,
                 type,

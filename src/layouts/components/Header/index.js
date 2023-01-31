@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from '~/components/Image';
-import routesConfig from '~/config/routes';
+import Config from '~/config';
 import {
     faEllipsisVertical,
     faSignOut,
@@ -109,7 +109,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={routesConfig.home} className={cx('images-style')}>
+                <Link to={Config.routes.home} className={cx('images-style')}>
                     <img src={images.logo} alt="Tiktok" />
                 </Link>
 
@@ -121,11 +121,6 @@ function Header() {
                             {/* <button className={cx('upload-btn')}>
                                 + Tải Lên
                             </button> */}
-                            <Tippy
-                                content="Upload Video"
-                                placement="bottom"
-                                delay={[0, 200]}
-                            >
                                 <button className={cx('action-btn')}>
                                     {/* <UploadIcon/> */}
                                     <PlusIcon className={cx('Plus-Icon')} />
@@ -133,7 +128,7 @@ function Header() {
                                         Upload{' '}
                                     </span>
                                 </button>
-                            </Tippy>
+                            
 
                             <Tippy
                                 content="Message"
