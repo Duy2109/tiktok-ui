@@ -20,7 +20,8 @@
 .inner {
     height: 100%;
     width: var(--defalt-layout-width);
-    padding: 0 var(--defalt-layout-horizontal-spacer);
+    // padding: 0 var(--defalt-layout-horizontal-spacer);
+    padding: 0px 24px 0px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,11 +52,12 @@
 }
 
 .actions-btn{
+    padding: 3px 3px 0px;
+    margin: 0px 0px 0px 16px;
     position: relative;
     color: #161823;
     font-size: 2.2rem ;
     background-color: transparent;
-    padding: 4px 10px;
     cursor: pointer;
     display: flex;
 }
@@ -75,8 +77,8 @@
 
 .sub-message{
     position: absolute;
-    top: -6px;
-    right: 3px;
+    top: -7px;
+    right: -3px;
     padding: 0px;
     min-width: 2rem;
     height: 2rem;
@@ -91,8 +93,8 @@
 
 .sub-inbox{
     position: absolute;
-    top: -2px;
-    right: 7px;
+    top: -4px;
+    right: -1px;
     padding: 0px;
     height: 2rem;
     min-width: 2rem;
