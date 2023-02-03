@@ -3,7 +3,15 @@ import Menu from './Menu';
 import { MenuItem } from './Menu';
 import styles from './Sidebar.module.scss';
 import Config from '~/config';
-import { HomeActiveIcon, HomeIcon, LiveActiveIcon, LiveIcon, UserGroupActiveIcon, UserGroupIcon } from '~/components/Icons';
+import {
+    HomeActiveIcon,
+    HomeIcon,
+    LiveActiveIcon,
+    LiveIcon,
+    UserGroupActiveIcon,
+    UserGroupIcon,
+} from '~/components/Icons';
+import SuggestedAccounts from '~/components/SuggestedAccounts';
 
 const cx = classNames.bind(styles);
 
@@ -15,20 +23,22 @@ function Sidebar() {
                     title="For You"
                     to={Config.routes.home}
                     icon={<HomeIcon />}
-                    activeIcon={<HomeActiveIcon/>}
+                    activeIcon={<HomeActiveIcon />}
                 />
                 <MenuItem
                     title="Following"
                     to={Config.routes.following}
                     icon={<UserGroupIcon />}
-                    activeIcon={<UserGroupActiveIcon/>}
+                    activeIcon={<UserGroupActiveIcon />}
                 />
                 <MenuItem
                     title="LIVE"
                     to={Config.routes.live}
                     icon={<LiveIcon />}
-                    activeIcon={<LiveActiveIcon/>}
+                    activeIcon={<LiveActiveIcon />}
                 />
+                <SuggestedAccounts label="Suggested accounts" seeAll="See all" />
+                {/* <SuggestedAccounts label="Following accounts" seeAll="See all" /> */}
             </Menu>
         </aside>
     );
