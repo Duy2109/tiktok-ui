@@ -1,23 +1,25 @@
-import styles from "./SuggestedAccounts.module.scss";
-import classNames from "classnames/bind";
-import PropTypes from 'prop-types'
-import AccountItem from "./AccountItem";
+import styles from './SuggestedAccounts.module.scss';
+import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
+import AccountItem from './AccountItem';
 const cx = classNames.bind(styles);
 
-function SuggestedAccounts({label, seeAll}) {
+function SuggestedAccounts({ label, data = [], }) {
     return (
-    <div className={cx('wrapper')}>
+        <div className={cx('wrapper')}>
             <p className={cx('label')}> {label} </p>
-            <AccountItem/>
-            <AccountItem/>
-            <AccountItem/>
-            <p className={cx('see-all')}> {seeAll} </p>
-    </div>
-    )
+            {data.map((account) => (
+                <AccountItem key={account.id} data={account} />
+            ))}
+            <p className={cx('see-all')}>
+                See all
+            </p>
+        </div>
+    );
 }
 
-
-SuggestedAccounts.propTypes={
-    label: PropTypes.string.isRequired
-}
+SuggestedAccounts.propTypes = {
+    label: PropTypes.string.isRequired,
+    data: PropTypes.array,
+};
 export default SuggestedAccounts;
